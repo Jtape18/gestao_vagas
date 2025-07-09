@@ -1,9 +1,11 @@
-package br.com.josepaulo.gestao_vagas.modules.candidate;
+package br.com.josepaulo.gestao_vagas.modules.candidate.repositories;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.com.josepaulo.gestao_vagas.modules.candidate.CandidateEntity;
 
 public interface CandidateRepository extends JpaRepository<CandidateEntity, UUID> {
 
