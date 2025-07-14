@@ -1,5 +1,6 @@
 package br.com.josepaulo.gestao_vagas.modules.candidate.controllers;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.josepaulo.gestao_vagas.modules.candidate.entities.CandidateEntity;
 import br.com.josepaulo.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import br.com.josepaulo.gestao_vagas.modules.candidate.useCases.ProfileCandidateUseCase;
+import br.com.josepaulo.gestao_vagas.modules.company.entities.JobEntity;
+import br.com.josepaulo.gestao_vagas.modules.company.useCases.ListAllJobsByFilterUseCase;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -26,6 +30,9 @@ public class CandidateController {
 
     @Autowired
     private ProfileCandidateUseCase profileCandidateUseCase;
+
+    @Autowired
+    private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
 
     @PostMapping("/")
     @PreAuthorize("hasRole('CANDIDATE')")
@@ -53,4 +60,11 @@ public class CandidateController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/job")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    public List<JobEntity> findJobByFilter(@RequestParam String filter) {
+        return this.listAllJobsByFilterUseCase.execute(filter);
+    }
+
 }
