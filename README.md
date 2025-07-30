@@ -12,7 +12,7 @@ Este é um projeto de **Gestão de Vagas** desenvolvido como parte da formação
 - ✅ **Spring Data JPA**
 - ✅ **Lombok**
 - ✅ **PostgreSQL**
-- ✅ **Docker** (opcional)
+- ✅ **Docker** 
 - ✅ **Maven**
 - ✅ **Bean Validation (Jakarta Validation API)**
 
